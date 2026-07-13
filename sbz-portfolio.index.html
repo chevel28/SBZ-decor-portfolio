@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBZ Dream Weddings & Decor - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navigation -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Area: Dynamically handles Logo or Default Text -->
+            <div id="brand-logo-container" class="flex items-center">
+                <div id="default-text-logo" class="flex flex-col">
+                    <span class="serif text-2xl font-semibold tracking-wide text-rose-700">SBZ Dream Weddings</span>
+                    <span class="text-xs tracking-widest uppercase text-stone-500 -mt-1">& Decor</span>
+                </div>
+            </div>
+            
+            <nav class="flex items-center space-x-6">
+                <button onclick="switchView('portfolio')" id="nav-portfolio" class="text-rose-600 font-medium transition">Portfolio</button>
+                <button onclick="switchView('admin')" id="nav-admin" class="text-stone-500 hover:text-rose-600 font-medium transition flex items-center gap-1">
+                    <span>Admin Panel</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- VIEW: PORTFOLIO -->
+        <section id="view-portfolio" class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <h1 class="serif text-4xl sm:text-5xl font-normal text-stone-900">Our Gallery</h1>
+                <p class="text-stone-500 text-sm sm:text-base">Explore our bespoke setups, vibrant backdrops, and signature transformations tailored for beautiful celebrations.</p>
+                <div class="h-0.5 w-16 bg-rose-300 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div id="category-tabs" class="flex flex-wrap justify-center gap-2 border-b border-stone-200 pb-4">
+                <!-- Dynamically Inserted Tabs -->
+            </div>
+
+            <!-- Image Grid Gallery -->
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-4">
+                <!-- Dynamically Inserted Images -->
+            </div>
+        </section>
+
+        <!-- VIEW: ADMIN PANEL -->
+        <section id="view-admin" class="hidden space-y-8">
+            <div class="border-b border-stone-200 pb-4">
+                <h1 class="serif text-3xl font-semibold text-stone-900">Admin Dashboard</h1>
+                <p class="text-stone-500 text-sm">Manage your branding collections, customize categories, and upload fresh media layers seamlessly.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column: Management Tools -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- NEW Section: Manage Logo -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                        <h3 class="font-medium text-stone-900 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Brand Settings & Logo
+                        </h3>
+                        <div class="space-y-3">
+                            <label class="block text-xs font-medium text-stone-500 uppercase">Upload Logo Image</label>
+                            <input type="file" id="logo-file-input" accept="image/*" class="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-stone-100 file:text-stone-700 hover:file:bg-stone-200 cursor-pointer">
+                        </div>
+                        <div id="admin-logo-preview" class="hidden items-center justify-between p-2 bg-stone-50 rounded-lg border border-stone-100">
+                            <span class="text-xs text-stone-500">Current Logo Active</span>
+                            <button onclick="removeLogo()" class="text-xs text-red-600 hover:underline font-medium">Remove Logo</button>
+                        </div>
+                        <button onclick="uploadLogo()" class="w-full bg-stone-900 text-white hover:bg-stone-800 text-sm font-medium py-2 rounded-md transition">Update Logo</button>
+                    </div>
+
+                    <!-- Section: Add Category -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                        <h3 class="font-medium text-stone-900 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Create New Category
+                        </h3>
+                        <div>
+                            <input type="text" id="new-cat-input" placeholder="e.g., Birthday Bashes" class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500 text-sm">
+                        </div>
+                        <button onclick="addCategory()" class="w-full bg-stone-950 text-white hover:bg-stone-800 text-sm font-medium py-2 rounded-md transition">Add Category</button>
+                    </div>
+
+                    <!-- Section: Add Image -->
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                        <h3 class="font-medium text-stone-900 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Upload New Image
+                        </h3>
+                        <div class="space-y-3">
+                            <label class="block text-xs font-medium text-stone-500 uppercase">Target Category</label>
+                            <select id="upload-cat-select" class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500 text-sm bg-stone-50">
+                                <!-- Dynamically Options -->
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-xs font-medium text-stone-500 uppercase">Choose Image File</label>
+                            <input type="file" id="upload-file-input" accept="image/*" class="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100 cursor-pointer">
+                        </div>
+                        <button onclick="uploadImage()" class="w-full bg-rose-600 text-white hover:bg-rose-700 text-sm font-medium py-2 rounded-md transition">Upload to Gallery</button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Active Collections Grid Map -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-200 shadow-sm space-y-4">
+                    <h3 class="font-medium text-stone-900">Active Database Management</h3>
+                    <div id="admin-categories-list" class="space-y-6 divide-y divide-stone-100">
+                        <!-- Dynamically populated structures for deleting categories/images -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 text-xs py-6 border-t border-stone-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 SBZ Dream Weddings & Decor. All rights reserved.</p>
+            <p class="text-stone-600">Dynamic Browser-Local Engine Storage Mode</p>
+        </div>
+    </footer>
+
+    <!-- Scripting Infrastructure Logic -->
+    <script>
+        // Seed initial images using base64 mock proxies representing your attached setups
+        const initialImages = [
+            { id: "img1", category: "Birthdays", src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80" }, 
+            { id: "img2", category: "Birthdays", src: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80" }, 
+            { id: "img3", category: "Weddings & Galas", src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" } 
+        ];
+
+        let state = {
+            categories: ["All", "Birthdays", "Weddings & Galas", "Corporate & Others"],
+            images: initialImages,
+            currentFilter: "All",
+            logo: null // Added base64 holding key for user custom branding logo
+        };
+
+        // Load state from localStorage if it exists
+        if (localStorage.getItem('sbz_portfolio_state')) {
+            state = JSON.parse(localStorage.getItem('sbz_portfolio_state'));
+        } else {
+            saveState();
+        }
+
+        function saveState() {
+            localStorage.setItem('sbz_portfolio_state', JSON.stringify(state));
+        }
+
+       function switchView(view) {
+    const pView = document.getElementById('view-portfolio');
+    const aView = document.getElementById('view-admin');
+    const navP = document.getElementById('nav-portfolio');
+    const navA = document.getElementById('nav-admin');
+
+    if (view === 'portfolio') {
+        pView.classList.remove('hidden');
+        aView.classList.add('hidden');
+        navP.className = "text-rose-600 font-medium transition";
+        navA.className = "text-stone-500 hover:text-rose-600 font-medium transition flex items-center gap-1";
+        renderPortfolio();
+    } else {
+        // Ask for a password before showing the admin panel
+        const password = prompt("Enter Admin Password:");
+        if (password !== "SBZdecor2026") { // <-- Change your password here
+            alert("Incorrect password access denied.");
+            return; 
+        }
+
+        pView.classList.add('hidden');
+        aView.classList.remove('hidden');
+        navP.className = "text-stone-500 hover:text-rose-600 font-medium transition";
+        navA.className = "text-rose-600 font-medium transition flex items-center gap-1";
+        renderAdmin();
+    }
+}
+
+        // Renders or refreshes the header branding depending on logo state
+       function renderLogo() {
+    const container = document.getElementById('brand-logo-container');
+    if (state.logo) {
+        // Updated with rounded-full, aspect-square, and border formatting
+        container.innerHTML = `<img src="${state.logo}" alt="SBZ Logo" class="h-20 aspect-square rounded-full object-cover border-2 border-rose-200 shadow-sm cursor-pointer" onclick="switchView('portfolio')">`;
+    } else {
+          container.innerHTML = `
+                    <div id="default-text-logo" class="flex flex-col cursor-pointer" onclick="switchView('portfolio')">
+                        <span class="serif text-2xl font-semibold tracking-wide text-rose-700">SBZ Dream Weddings</span>
+                        <span class="text-xs tracking-widest uppercase text-stone-500 -mt-1">& Decor</span>
+                    </div>
+                `;
+            }
+        }
+
+        function uploadLogo() {
+            const logoInput = document.getElementById('logo-file-input');
+            if (!logoInput.files || !logoInput.files[0]) return alert('Please select an image file to use as your logo.');
+
+            const file = logoInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                state.logo = e.target.result;
+                saveState();
+                logoInput.value = '';
+                renderLogo();
+                renderAdmin();
+                alert('Brand logo updated successfully!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeLogo() {
+            if (!confirm('Are you sure you want to revert back to default text branding?')) return;
+            state.logo = null;
+            saveState();
+            renderLogo();
+            renderAdmin();
+        }
+
+        function renderPortfolio() {
+            renderLogo();
+            // Render Tabs
+            const tabsContainer = document.getElementById('category-tabs');
+            tabsContainer.innerHTML = '';
+            state.categories.forEach(cat => {
+                const isActive = state.currentFilter === cat;
+                const btn = document.createElement('button');
+                btn.className = `px-4 py-1.5 rounded-full text-sm font-medium transition ${isActive ? 'bg-rose-600 text-white shadow-sm' : 'bg-white border border-stone-200 text-stone-600 hover:bg-stone-50'}`;
+                btn.innerText = cat;
+                btn.onclick = () => {
+                    state.currentFilter = cat;
+                    renderPortfolio();
+                };
+                tabsContainer.appendChild(btn);
+            });
+
+            // Render Grid Images
+            const gridContainer = document.getElementById('gallery-grid');
+            gridContainer.innerHTML = '';
+            
+            const filteredImages = state.currentFilter === 'All' 
+                ? state.images 
+                : state.images.filter(img => img.category === state.currentFilter);
+
+            if (filteredImages.length === 0) {
+                gridContainer.innerHTML = `<div class="col-span-full py-12 text-center text-stone-400 text-sm">No items inside this collection yet. Open Admin to upload!</div>`;
+                return;
+            }
+
+            filteredImages.forEach(img => {
+                const card = document.createElement('div');
+                card.className = "group bg-white rounded-xl overflow-hidden border border-stone-200/60 shadow-sm hover:shadow-md transition duration-300 flex flex-col";
+                card.innerHTML = `
+                    <div class="relative pt-[125%] overflow-hidden bg-stone-100">
+                        <img src="${img.src}" alt="Decor Setup" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4 flex-grow flex items-center justify-between">
+                        <span class="inline-block px-2.5 py-0.5 bg-stone-100 text-stone-600 text-[11px] font-medium tracking-wide rounded-md uppercase">${img.category}</span>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function renderAdmin() {
+            renderLogo();
+            
+            // Render logo status configuration panel
+            const logoPreviewBlock = document.getElementById('admin-logo-preview');
+            if (state.logo) {
+                logoPreviewBlock.classList.remove('hidden');
+                logoPreviewBlock.classList.add('flex');
+            } else {
+                logoPreviewBlock.classList.add('hidden');
+                logoPreviewBlock.classList.remove('flex');
+            }
+
+            // Populate select options for targets
+            const select = document.getElementById('upload-cat-select');
+            select.innerHTML = '';
+            state.categories.filter(c => c !== 'All').forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.innerText = cat;
+                select.appendChild(opt);
+            });
+
+            // Populate the management list
+            const list = document.getElementById('admin-categories-list');
+            list.innerHTML = '';
+
+            state.categories.filter(c => c !== 'All').forEach((cat, index) => {
+                const catImages = state.images.filter(i => i.category === cat);
+                
+                const section = document.createElement('div');
+                section.className = "pt-4 first:pt-0 space-y-3";
+                
+                let imgThumbnails = '';
+                catImages.forEach(img => {
+                    imgThumbnails += `
+                        <div class="relative w-16 h-16 rounded-md overflow-hidden border border-stone-200 group bg-stone-50">
+                            <img src="${img.src}" class="w-full h-full object-cover">
+                            <button onclick="deleteImage('${img.id}')" class="absolute inset-0 bg-red-600/80 text-white opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-[10px] font-medium">Delete</button>
+                        </div>
+                    `;
+                });
+
+                section.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-stone-900 text-sm">${cat}</h4>
+                            <p class="text-xs text-stone-400">${catImages.length} images assigned</p>
+                        </div>
+                        <button onclick="deleteCategory('${cat}')" class="text-xs text-red-600 hover:underline">Remove Category</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        ${imgThumbnails || '<p class="text-xs text-stone-400 italic">No images present inside this deck layer.</p>'}
+                    </div>
+                `;
+                list.appendChild(section);
+            });
+        }
+
+        function addCategory() {
+            const input = document.getElementById('new-cat-input');
+            const name = input.value.trim();
+            if (!name) return alert('Please input a proper structural key category string.');
+            if (state.categories.includes(name)) return alert('Category duplicate registered.');
+            
+            state.categories.push(name);
+            input.value = '';
+            saveState();
+            renderAdmin();
+        }
+
+        function deleteCategory(catName) {
+            if (!confirm(`Are you sure you want to delete "${catName}"? This drops associated portfolio assets.`)) return;
+            state.categories = state.categories.filter(c => c !== catName);
+            state.images = state.images.filter(i => i.category !== catName);
+            if (state.currentFilter === catName) state.currentFilter = 'All';
+            saveState();
+            renderAdmin();
+        }
+
+        function uploadImage() {
+            const select = document.getElementById('upload-cat-select');
+            const fileInput = document.getElementById('upload-file-input');
+            const targetCat = select.value;
+
+            if (!targetCat) return alert('Establish or select a category destination map first.');
+            if (!fileInput.files || !fileInput.files[0]) return alert('Please supply a targeting graphic image file resource.');
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const newImg = {
+                    id: 'img_' + Date.now(),
+                    category: targetCat,
+                    src: e.target.result
+                };
+                state.images.push(newImg);
+                saveState();
+                fileInput.value = '';
+                alert('Image added to gallery database successfully!');
+                renderAdmin();
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function deleteImage(id) {
+            state.images = state.images.filter(i => i.id !== id);
+            saveState();
+            renderAdmin();
+        }
+
+        // Init Run
+        renderPortfolio();
+    </script>
+</body>
+</html>
